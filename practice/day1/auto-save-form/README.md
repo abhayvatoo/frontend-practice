@@ -163,7 +163,7 @@ useEffect(() => {
 }, []); // Missing form!
 ```
 
-✅ **Correct approaches shown in solution.jsx**
+✅ **Correct approaches shown in AutoSaveForm.jsx**
 
 ---
 
@@ -251,7 +251,7 @@ try {
 ## Files
 
 - `AutoSaveForm.jsx` - Your implementation
-- `solution.jsx` - Reference solution
+- `AutoSaveForm.jsx` - Reference solution
 - `README.md` - This file
 
 ---

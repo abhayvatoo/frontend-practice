@@ -1,10 +1,5 @@
 # React Quick Reference - Cheat Sheet
 
-**Last Updated**: Day 1  
-**Use**: Quick lookup during practice and assessment
-
----
-
 ## useState Patterns
 
 ```javascript

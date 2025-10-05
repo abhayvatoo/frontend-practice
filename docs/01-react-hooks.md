@@ -1,10 +1,5 @@
 # React Hooks - Complete Reference
 
-**Study Time**: 2 hours  
-**Date**: Day 1, Morning Session
-
----
-
 ## Table of Contents
 1. [useState](#usestate)
 2. [useEffect](#useeffect)

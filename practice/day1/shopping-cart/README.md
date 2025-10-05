@@ -136,7 +136,7 @@ if (i === idx) // Wrong - comparing object to number
 {cart.map(item => <div>...</div>)} // Missing key prop
 ```
 
-✅ **Correct approaches shown in solution.jsx**
+✅ **Correct approaches shown in AutoSaveForm.jsx**
 
 ---
 
@@ -177,7 +177,7 @@ if (i === idx) // Wrong - comparing object to number
 ## Files
 
 - `ShoppingCart.jsx` - Your implementation
-- `solution.jsx` - Reference solution
+- `AutoSaveForm.jsx` - Reference solution
 - `README.md` - This file
 
 ---
