@@ -15,39 +15,40 @@
 Build a shopping cart component with the following features:
 
 ### Data Structure
+
 ```javascript
 const products = [
   { id: 1, name: "iPhone", price: 999 },
   { id: 2, name: "iPad", price: 599 },
-  { id: 3, name: "MacBook", price: 1299 }
+  { id: 3, name: "MacBook", price: 1299 },
 ];
 ```
 
 ### Functional Requirements
 
 1. **Product Display**
-    - Show all available products
-    - Display name and price for each product
-    - "Add to Cart" button
+   - Show all available products
+   - Display name and price for each product
+   - "Add to Cart" button
 
 2. **Cart Management**
-    - Add product to cart (if not in cart, set quantity = 1)
-    - Increment quantity if product already in cart
-    - Decrement quantity button (remove when quantity reaches 0)
-    - Remove entire product button (regardless of quantity)
-    - Update quantity via input field
+   - Add product to cart (if not in cart, set quantity = 1)
+   - Increment quantity if product already in cart
+   - Decrement quantity button (remove when quantity reaches 0)
+   - Remove entire product button (regardless of quantity)
+   - Update quantity via input field
 
 3. **Cart Display**
-    - Show all items in cart with quantity
-    - Display subtotal for each item (price × quantity)
-    - Display total cart value
-    - Show "Cart is empty" when no items
+   - Show all items in cart with quantity
+   - Display subtotal for each item (price × quantity)
+   - Display total cart value
+   - Show "Cart is empty" when no items
 
 4. **Edge Cases to Handle**
-    - Empty cart state
-    - Quantity cannot be < 1
-    - Prevent negative quantities in input
-    - Handle direct quantity input (validate number)
+   - Empty cart state
+   - Quantity cannot be < 1
+   - Prevent negative quantities in input
+   - Handle direct quantity input (validate number)
 
 ---
 
@@ -69,8 +70,8 @@ App
 // Cart state structure
 [
   { id: 1, name: "iPhone", price: 999, quantity: 2 },
-  { id: 2, name: "iPad", price: 599, quantity: 1 }
-]
+  { id: 2, name: "iPad", price: 599, quantity: 1 },
+];
 ```
 
 ---
@@ -78,38 +79,39 @@ App
 ## Key Concepts Practiced
 
 ### 1. State Management
+
 ```javascript
 const [cart, setCart] = useState([]);
 ```
 
 ### 2. Finding Items
+
 ```javascript
-const existingItem = cart.find(i => i.id === item.id);
+const existingItem = cart.find((i) => i.id === item.id);
 ```
 
 ### 3. Adding Items (Immutably)
+
 ```javascript
 // If not in cart
 setCart([...cart, { ...item, quantity: 1 }]);
 
 // If in cart
-setCart(cart.map(i => 
-  i.id === item.id 
-    ? { ...i, quantity: i.quantity + 1 }
-    : i
-));
+setCart(
+  cart.map((i) => (i.id === item.id ? { ...i, quantity: i.quantity + 1 } : i)),
+);
 ```
 
 ### 4. Removing Items
+
 ```javascript
-setCart(cart.filter(i => i.id !== id));
+setCart(cart.filter((i) => i.id !== id));
 ```
 
 ### 5. Calculating Totals
+
 ```javascript
-const total = cart.reduce((acc, item) => 
-  acc + (item.price * item.quantity), 0
-);
+const total = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
 ```
 
 ---
@@ -117,23 +119,29 @@ const total = cart.reduce((acc, item) =>
 ## Common Mistakes to Avoid
 
 ❌ **Mutating state directly**
+
 ```javascript
 cart[0].quantity = 5; // DON'T
 ```
 
 ❌ **Not adding initial quantity**
+
 ```javascript
 setCart([...cart, item]); // Missing quantity: 1
 ```
 
 ❌ **Comparing objects instead of IDs**
+
 ```javascript
 if (i === idx) // Wrong - comparing object to number
 ```
 
 ❌ **Missing keys in lists**
+
 ```javascript
-{cart.map(item => <div>...</div>)} // Missing key prop
+{
+  cart.map((item) => <div>...</div>);
+} // Missing key prop
 ```
 
 ✅ **Correct approaches shown in AutoSaveForm.jsx**
@@ -185,6 +193,7 @@ if (i === idx) // Wrong - comparing object to number
 ## Next Steps
 
 After completing:
+
 1. Compare with solution
 2. Note any difficulties
 3. Add learnings to main docs

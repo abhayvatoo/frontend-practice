@@ -8,20 +8,20 @@ const [value, setValue] = useState(initial);
 
 // Toggle
 const [on, setOn] = useState(false);
-setOn(prev => !prev);
+setOn((prev) => !prev);
 
 // Form object
-const [form, setForm] = useState({ name: '', email: '' });
-setForm(prev => ({ ...prev, [name]: value }));
+const [form, setForm] = useState({ name: "", email: "" });
+setForm((prev) => ({ ...prev, [name]: value }));
 
 // Array add
 setItems([...items, newItem]);
 
 // Array remove
-setItems(items.filter(i => i.id !== id));
+setItems(items.filter((i) => i.id !== id));
 
 // Array update
-setItems(items.map(i => i.id === id ? { ...i, changes } : i));
+setItems(items.map((i) => (i.id === id ? { ...i, changes } : i)));
 ```
 
 ---
@@ -47,8 +47,8 @@ useEffect(() => {
 
 // Fetch on mount
 useEffect(() => {
-  fetch('/api')
-    .then(r => r.json())
+  fetch("/api")
+    .then((r) => r.json())
     .then(setData);
 }, []);
 ```
@@ -64,7 +64,9 @@ ref.current.focus();
 
 // Previous value
 const prevRef = useRef();
-useEffect(() => { prevRef.current = value }, [value]);
+useEffect(() => {
+  prevRef.current = value;
+}, [value]);
 
 // Memoize function
 const fn = useCallback(() => {}, [deps]);
@@ -79,19 +81,19 @@ const val = useMemo(() => expensiveCalc(data), [data]);
 
 ```javascript
 // Find
-const item = arr.find(i => i.id === id);
+const item = arr.find((i) => i.id === id);
 
 // Find index
-const idx = arr.findIndex(i => i.id === id);
+const idx = arr.findIndex((i) => i.id === id);
 
 // Check exists
-const exists = arr.some(i => i.id === id);
+const exists = arr.some((i) => i.id === id);
 
 // Filter
-const filtered = arr.filter(i => i.active);
+const filtered = arr.filter((i) => i.active);
 
 // Map (transform)
-const doubled = arr.map(i => i * 2);
+const doubled = arr.map((i) => i * 2);
 
 // Reduce (sum)
 const total = arr.reduce((acc, i) => acc + i.price, 0);
@@ -115,7 +117,7 @@ const handleSubmit = (e) => {
 };
 
 // Button click
-<button onClick={() => handleClick(id)}>Click</button>
+<button onClick={() => handleClick(id)}>Click</button>;
 
 // Prevent default
 const handleClick = (e) => {
@@ -135,15 +137,25 @@ if (error) return <Error />;
 return <Data />;
 
 // Ternary
-{isOpen ? <Modal /> : null}
-{count > 0 ? <Count /> : <Empty />}
+{
+  isOpen ? <Modal /> : null;
+}
+{
+  count > 0 ? <Count /> : <Empty />;
+}
 
 // Logical AND
-{error && <ErrorMessage />}
-{items.length > 0 && <List />}
+{
+  error && <ErrorMessage />;
+}
+{
+  items.length > 0 && <List />;
+}
 
 // Nullish coalescing
-{user?.name ?? 'Guest'}
+{
+  user?.name ?? "Guest";
+}
 ```
 
 ---
@@ -152,27 +164,28 @@ return <Data />;
 
 ```javascript
 // Basic map
-{items.map(item => (
-  <div key={item.id}>{item.name}</div>
-))}
+{
+  items.map((item) => <div key={item.id}>{item.name}</div>);
+}
 
 // With index (avoid as key)
-{items.map((item, i) => (
-  <div key={item.id}>{item.name}</div>
-))}
+{
+  items.map((item, i) => <div key={item.id}>{item.name}</div>);
+}
 
 // Filter then map
-{items
-  .filter(i => i.active)
-  .map(i => <Item key={i.id} {...i} />)
+{
+  items.filter((i) => i.active).map((i) => <Item key={i.id} {...i} />);
 }
 
 // Empty state
-{items.length === 0 ? (
-  <p>No items</p>
-) : (
-  items.map(i => <Item key={i.id} {...i} />)
-)}
+{
+  items.length === 0 ? (
+    <p>No items</p>
+  ) : (
+    items.map((i) => <Item key={i.id} {...i} />)
+  );
+}
 ```
 
 ---
@@ -183,8 +196,8 @@ return <Data />;
 // Basic validation
 const validate = (form) => {
   const errors = {};
-  if (!form.email) errors.email = 'Required';
-  if (!form.email.includes('@')) errors.email = 'Invalid';
+  if (!form.email) errors.email = "Required";
+  if (!form.email.includes("@")) errors.email = "Invalid";
   return errors;
 };
 
@@ -204,7 +217,7 @@ const handleChange = (e) => {
   const { name, value } = e.target;
   setForm({ ...form, [name]: value });
   if (errors[name]) {
-    setErrors({ ...errors, [name]: '' });
+    setErrors({ ...errors, [name]: "" });
   }
 };
 ```
@@ -223,8 +236,8 @@ useEffect(() => {
   async function fetchData() {
     try {
       setLoading(true);
-      const res = await fetch('/api/data');
-      if (!res.ok) throw new Error('Failed');
+      const res = await fetch("/api/data");
+      if (!res.ok) throw new Error("Failed");
       const json = await res.json();
       setData(json);
     } catch (err) {
@@ -238,10 +251,10 @@ useEffect(() => {
 
 // POST request
 const submit = async (formData) => {
-  const res = await fetch('/api/submit', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(formData)
+  const res = await fetch("/api/submit", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(formData),
   });
   return res.json();
 };
@@ -253,23 +266,23 @@ const submit = async (formData) => {
 
 ```javascript
 // Save
-localStorage.setItem('key', JSON.stringify(data));
+localStorage.setItem("key", JSON.stringify(data));
 
 // Load
-const saved = localStorage.getItem('key');
+const saved = localStorage.getItem("key");
 const data = saved ? JSON.parse(saved) : null;
 
 // Remove
-localStorage.removeItem('key');
+localStorage.removeItem("key");
 
 // Clear all
 localStorage.clear();
 
 // With error handling
 try {
-  localStorage.setItem('key', JSON.stringify(data));
+  localStorage.setItem("key", JSON.stringify(data));
 } catch (e) {
-  console.error('Storage error:', e);
+  console.error("Storage error:", e);
 }
 ```
 
@@ -283,11 +296,11 @@ const timerRef = useRef(null);
 
 useEffect(() => {
   clearTimeout(timerRef.current);
-  
+
   timerRef.current = setTimeout(() => {
     // Do something after delay
   }, 500);
-  
+
   return () => clearTimeout(timerRef.current);
 }, [dependency]);
 ```
@@ -299,23 +312,27 @@ useEffect(() => {
 ```javascript
 // ❌ Mutating state
 arr.push(item);
-obj.name = 'John';
+obj.name = "John";
 
 // ✅ Immutable updates
 setArr([...arr, item]);
-setObj({ ...obj, name: 'John' });
+setObj({ ...obj, name: "John" });
 
 // ❌ Missing key
-{items.map(i => <div>{i.name}</div>)}
+{
+  items.map((i) => <div>{i.name}</div>);
+}
 
 // ✅ With key
-{items.map(i => <div key={i.id}>{i.name}</div>)}
+{
+  items.map((i) => <div key={i.id}>{i.name}</div>);
+}
 
 // ❌ Stale closure
 setTimeout(() => setCount(count + 1), 1000);
 
 // ✅ Callback form
-setTimeout(() => setCount(c => c + 1), 1000);
+setTimeout(() => setCount((c) => c + 1), 1000);
 
 // ❌ Missing cleanup
 useEffect(() => {
@@ -353,7 +370,7 @@ useEffect(() => {
 <Component {...props} />
 
 // Conditional prop
-<Component 
+<Component
   disabled={isDisabled}
   className={isActive ? 'active' : ''}
 />
@@ -391,10 +408,10 @@ const fullName = `${firstName} ${lastName}`;
 
 // ✅ Keep state minimal
 const [users, setUsers] = useState([]);
-const activeUsers = users.filter(u => u.active); // Derive
+const activeUsers = users.filter((u) => u.active); // Derive
 
 // ✅ Use callback for updates
-setCount(c => c + 1);
+setCount((c) => c + 1);
 
 // ✅ Memoize only when needed
 const expensive = useMemo(() => calc(data), [data]);
@@ -409,10 +426,10 @@ const expensive = useMemo(() => calc(data), [data]);
 3. **Start simple** - basic functionality first
 4. **Test incrementally** - console.log frequently
 5. **Handle edge cases**:
-    - Empty arrays
-    - Null/undefined values
-    - Loading states
-    - Error states
+   - Empty arrays
+   - Null/undefined values
+   - Loading states
+   - Error states
 6. **Complete all levels > Perfect one level**
 7. **Time management**: 15/25/30/20 min per level
 
@@ -421,6 +438,7 @@ const expensive = useMemo(() => calc(data), [data]);
 ## Quick Checks
 
 Before submitting:
+
 - [ ] No console errors
 - [ ] All keys in lists
 - [ ] No state mutations
@@ -435,41 +453,48 @@ Before submitting:
 ## Common Assessment Patterns
 
 ### 1. Render from JSON
+
 ```javascript
-const data = require('./data.json');
-{data.items.map(item => <Card key={item.id} {...item} />)}
+const data = require("./data.json");
+{
+  data.items.map((item) => <Card key={item.id} {...item} />);
+}
 ```
 
 ### 2. Add/Remove from list
+
 ```javascript
 const add = (item) => setItems([...items, { ...item, id: Date.now() }]);
-const remove = (id) => setItems(items.filter(i => i.id !== id));
+const remove = (id) => setItems(items.filter((i) => i.id !== id));
 ```
 
 ### 3. Move between columns
+
 ```javascript
 const moveRight = (id) => {
-  setItems(items.map(i => 
-    i.id === id ? { ...i, column: i.column + 1 } : i
-  ));
+  setItems(
+    items.map((i) => (i.id === id ? { ...i, column: i.column + 1 } : i)),
+  );
 };
 ```
 
 ### 4. Fetch and display
+
 ```javascript
 useEffect(() => {
-  fetch('/api/data')
-    .then(r => r.json())
+  fetch("/api/data")
+    .then((r) => r.json())
     .then(setData);
 }, []);
 ```
 
 ### 5. Form with validation
+
 ```javascript
 const [errors, setErrors] = useState({});
 const validate = () => {
   const e = {};
-  if (!form.name) e.name = 'Required';
+  if (!form.name) e.name = "Required";
   return e;
 };
 ```
